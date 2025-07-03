@@ -34,23 +34,23 @@ jobs:
       run: |
         aws s3 sync build/ s3://hellogitbuck/ --delete --acl public-read
 
-    - name: Set public bucket policy
-      run: |
-        cat <<EOF > policy.json
-        {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Sid": "PublicReadGetObject",
-              "Effect": "Allow",
-              "Principal": "*",
-              "Action": ["s3:GetObject"],
-              "Resource": ["arn:aws:s3:::hellogitbuck/*"]
-            }
-          ]
-        }
-        EOF
+    # - name: Set public bucket policy
+    #   run: |
+    #     cat <<EOF > policy.json
+    #     {
+    #       "Version": "2012-10-17",
+    #       "Statement": [
+    #         {
+    #           "Sid": "PublicReadGetObject",
+    #           "Effect": "Allow",
+    #           "Principal": "*",
+    #           "Action": ["s3:GetObject"],
+    #           "Resource": ["arn:aws:s3:::hellogitbuck/*"]
+    #         }
+    #       ]
+    #     }
+    #     EOF
 
-        aws s3api put-bucket-policy \
-          --bucket hellogitbuck \
-          --policy file://policy.json
+    #     aws s3api put-bucket-policy \
+    #       --bucket hellogitbuck \
+    #       --policy file://policy.json
